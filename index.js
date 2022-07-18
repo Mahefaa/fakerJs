@@ -4,7 +4,7 @@ const templateFiller=(first_name,last_name,nickname,birthday,gender,email,profil
     return (`('${first_name}','${last_name}','${nickname}','${birthday}','${gender}','${email}','${profile_pic}')`)
 };
 let total ="INSERT INTO account (first_name, last_name, nickname, birthday, gender, email, profile_pic) VALUES ";
-let limit = 250_000_000;
+let limit = 250_000;
 for(let i = 0 ; i < limit; i++){
     const first_name = faker.name.firstName();
     const last_name =faker.name.lastName();
@@ -14,7 +14,7 @@ for(let i = 0 ; i < limit; i++){
     const email = faker.internet.email();
     const profile_pic = faker.internet.url();
     total+=templateFiller(first_name,last_name,nickname,birthday,gender,email,profile_pic)
-    total+= (i < limit -1 )?",":""
+    total+= (i < limit -1 )?",":";"
 }
-fs.writeFileSync('250M.sql',total);
+fs.writeFileSync('data.sql',total);
 console.log(total.length);
